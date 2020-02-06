@@ -1,4 +1,4 @@
-//Ekin INSEL Trendyol Test Otomasyon Mühendisi API Testi Ödevi
+//Ekin İNSEL Trendyol API Test Ödevi
 package trendyolCase;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -10,8 +10,8 @@ import static org.hamcrest.core.IsEqual.equalTo;
 public class trendyolAPITestCase {
     Response resultBySearch;
     String linkBySearch = "http://www.omdbapi.com/?apikey=db908955&s=Harry Potter";
-    String imdbID;
     String linkByID;
+    String imdbID;
     String movieName = "Harry Potter and the Sorcerer's Stone";
     String expectedYear = "2001";
     String expectedReleased = "16 Nov 2001";
@@ -19,7 +19,7 @@ public class trendyolAPITestCase {
     int movieIndex = 0;
 
     @Before
-    public void startBySearch(){
+    public void startBySearch() {
         resultBySearch = RestAssured.get (linkBySearch).andReturn ();
         //all movie names
         String movies = resultBySearch.jsonPath ().getString ("Search.Title");
@@ -30,7 +30,7 @@ public class trendyolAPITestCase {
         }
         //find the ID of the wanted movie according to the index
         imdbID = resultBySearch.getBody ().path ("Search[" + movieIndex + "].imdbID");
-        linkByID = "http://www.omdbapi.com/?apikey=db908955&i="  + imdbID;
+        linkByID = "http://www.omdbapi.com/?apikey=db908955&i=" + imdbID;
     }
     @Test
     public void test_TitleFromID(){
